@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1072952038358-r06gdoi81ec36fp401rd54skcef1a68f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1072952038358-r06gdoi81ec36fp401rd54skcef1a68f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBQ8tyXjOn9inF8zpEvurlVe4FjdLUF3Hk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1072952038358</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lumebits.xelaarias</string>
+	<key>PROJECT_ID</key>
+	<string>xela-arias</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xela-arias.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1072952038358:ios:2d9aec35f2054ea2364a77</string>
+</dict>
+</plist>
