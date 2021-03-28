@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:xela_arias/navigation/model/app_tab.dart';
+import 'package:xela_arias/navigation/view/navigation_widget.dart';
 import 'package:xela_arias/theme.dart';
 
 abstract class BasePage extends StatelessWidget {
+  final AppTab appTab;
   final bool withBackButton;
   final String title;
 
-  const BasePage(Key key, {this.withBackButton = false, this.title})
+  const BasePage(Key key, {this.appTab, this.withBackButton = false, this.title})
       : super(key: key);
 
   List<Widget> actions() => null;
+
+  Widget bottomNavigationBar() => NavigationWidget(activeTab: appTab);
 
   Widget floatingActionButton(BuildContext context) => null;
 
@@ -54,6 +59,7 @@ abstract class BasePage extends StatelessWidget {
         ],
       ),
       floatingActionButton: floatingActionButton(context),
+        bottomNavigationBar: bottomNavigationBar()
     );
   }
 }
