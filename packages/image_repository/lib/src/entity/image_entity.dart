@@ -3,19 +3,19 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class PoemEntity extends Equatable {
+class ImageEntity extends Equatable {
   final String id;
-  final String text;
+  final String url;
   final String author;
   final String classroom;
   final DateTime date;
 
-  const PoemEntity(this.id, this.text, this.author, this.classroom, this.date);
+  const ImageEntity(this.id, this.url, this.author, this.classroom, this.date);
 
   Map<String, Object> toJson() {
     return {
       "id": id,
-      "text": text,
+      "url": url,
       "author": author,
       "classroom": classroom,
       "date": date,
@@ -23,27 +23,27 @@ class PoemEntity extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, text, author, classroom, date];
+  List<Object> get props => [id, url, author, classroom, date];
 
   @override
   String toString() {
-    return 'PoemEntity { id: $id, text: $text, author: $author, classroom: $classroom, date: $date }';
+    return 'ImageEntity { id: $id, url: $url, author: $author, classroom: $classroom, date: $date }';
   }
 
-  static PoemEntity fromJson(Map<String, Object> json) {
-    return PoemEntity(
+  static ImageEntity fromJson(Map<String, Object> json) {
+    return ImageEntity(
       json.containsKey("id") ? json["id"] as String : null,
-      json.containsKey("text") ? json["text"] as String : null,
+      json.containsKey("url") ? json["url"] as String : null,
       json.containsKey("author") ? json["author"] as String : null,
       json.containsKey("classroom") ? json["classroom"] as String : null,
       json.containsKey("date") ? json["date"] as DateTime : null,
     );
   }
 
-  static PoemEntity fromSnapshot(DocumentSnapshot snap) {
-    return PoemEntity(
+  static ImageEntity fromSnapshot(DocumentSnapshot snap) {
+    return ImageEntity(
       snap.id,
-      snap.get('text'),
+      snap.get('url'),
       snap.get('author'),
       snap.get('classroom'),
       snap.get('date').toDate(),
@@ -52,7 +52,7 @@ class PoemEntity extends Equatable {
 
   Map<String, Object> toDocument() {
     return {
-      "text": text,
+      "url": url,
       "author": author,
       "classroom": classroom,
       "date": date,
