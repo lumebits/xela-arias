@@ -23,10 +23,10 @@ class GenericCardWidget extends StatelessWidget {
                   child: Container(
                     child: InkWell(
                       onTap: () {
-                      print("GenericCard tapped: " + card.id);
-                      Navigator.pushNamed(context, XelaAriasRoutes.images,
-                          arguments: card);
-                    },
+                        print("GenericCard tapped: " + card.id);
+                        Navigator.pushNamed(context, XelaAriasRoutes.images,
+                            arguments: card);
+                      },
                       onLongPress: () async {
                         print("Long pressed card");
                       },
@@ -48,7 +48,6 @@ class GenericCardWidget extends StatelessWidget {
                   )
               ),
               PoemItem(poem: card.text),
-              //Expanded(child: Container(color: Colors.grey)),
             ]
         ),
         shape: RoundedRectangleBorder(
@@ -73,11 +72,11 @@ class PoemItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: AutoSizeText(
-              poem,
+              poem.replaceAll("_b","\n"),
               maxLines: 18,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 14,
+                fontSize: 13,
                 fontStyle: FontStyle.italic
               ),
             ),
