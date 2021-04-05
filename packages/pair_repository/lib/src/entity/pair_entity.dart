@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:poem_repository/poem_repository.dart';
-import 'package:image_repository/image_repository.dart';
 
 @immutable
 class PairEntity extends Equatable {
@@ -10,8 +8,8 @@ class PairEntity extends Equatable {
   final String classroom;
   final DateTime date;
   final String first;
-  final Image image;
-  final Poem poem;
+  final Map<String, dynamic> image;
+  final Map<String, dynamic> poem;
 
   const PairEntity(this.id, this.classroom, this.date, this.first, this.image, this.poem);
 
@@ -40,8 +38,8 @@ class PairEntity extends Equatable {
       json.containsKey("classroom") ? json["classroom"] as String : null,
       json.containsKey("date") ? json["date"] as DateTime : null,
       json.containsKey("first") ? json["first"] as String : null,
-      json.containsKey("image") ? json["image"] as Image : null,
-      json.containsKey("poem") ? json["poem"] as Poem : null,
+      json.containsKey("image") ? json["image"] as Map<String, dynamic> : null,
+      json.containsKey("poem") ? json["poem"] as Map<String, dynamic> : null,
     );
   }
 

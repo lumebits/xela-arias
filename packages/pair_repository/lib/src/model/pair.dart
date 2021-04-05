@@ -1,6 +1,4 @@
 import 'package:meta/meta.dart';
-import 'package:poem_repository/poem_repository.dart';
-import 'package:image_repository/image_repository.dart';
 import '../entity/entities.dart';
 
 @immutable
@@ -9,8 +7,8 @@ class Pair {
   final String classroom;
   final DateTime date;
   final String first;
-  final Image image;
-  final Poem poem;
+  final Map<String, dynamic> image;
+  final Map<String, dynamic> poem;
 
   Pair(this.id, this.classroom, this.date, this.first, this.image, this.poem);
 
