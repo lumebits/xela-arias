@@ -31,7 +31,7 @@ class InfinitePageState extends State<InfinitePage> {
         padding: EdgeInsets.only(bottom: 90.0),
         controller: _scrollController,
         shrinkWrap: true,
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         staggeredTileBuilder: (index) {
           return StaggeredTile.fit(index >= cardsList.length ? 2 : 1);
         },
