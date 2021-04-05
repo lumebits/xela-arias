@@ -75,6 +75,8 @@ class InfiniteBloc extends Bloc<InfiniteEvent, InfiniteState> {
       case EntityType.POEM:
         var poems = await fetchPoems(lastDate, offset);
         return poems.map((e) => GenericCard(e.id, e.text, e.author, xelaAriasImage, "", "POEM", e.date)).toList();
+      default:
+        return null;
     }
   }
 
