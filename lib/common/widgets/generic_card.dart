@@ -13,37 +13,37 @@ class GenericCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      semanticContainer: true,
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          print("GenericCard tapped: " + card.id);
-          Navigator.pushNamed(context, XelaAriasRoutes.images,
-              arguments: card);
-        },
-        onLongPress: () async {
-          print("Long pressed card");
-        },
-        child: Hero(
-          tag: card.id,
-          child: Material(
-            child: CachedNetworkImage(
-              height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
-              imageUrl: card.imageUrl,
-              imageBuilder: (context, imageProvider) => Ink.image(
-                fit: BoxFit.fill,
-                image: imageProvider,
+        semanticContainer: true,
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: () {
+            print("GenericCard tapped: " + card.id);
+            Navigator.pushNamed(context, XelaAriasRoutes.images,
+                arguments: card);
+          },
+          onLongPress: () async {
+            print("Long pressed card");
+          },
+          child: Hero(
+            tag: card.id,
+            child: Material(
+              child: CachedNetworkImage(
+                height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
+                imageUrl: card.imageUrl,
+                imageBuilder: (context, imageProvider) => Ink.image(
+                  fit: BoxFit.fill,
+                  image: imageProvider,
+                ),
+                placeholder: (context, url) => BottomLoader(),
               ),
-              placeholder: (context, url) => BottomLoader(),
             ),
           ),
         ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 5,
-      margin: EdgeInsets.all(10),
-    );
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        elevation: 5,
+        margin: EdgeInsets.all(10),
+      );
   }
 }

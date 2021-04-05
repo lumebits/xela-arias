@@ -67,7 +67,7 @@ class InfinitePageState extends State<InfinitePage> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      infiniteBloc.add(FetchTemplates());
+      infiniteBloc.add(FetchCards());
     }
   }
 }

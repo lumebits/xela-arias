@@ -5,4 +5,4 @@ abstract class InfiniteEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchTemplates extends InfiniteEvent {}
+class FetchCards extends InfiniteEvent {}
