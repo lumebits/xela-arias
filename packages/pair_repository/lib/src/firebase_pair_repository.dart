@@ -27,7 +27,10 @@ class FirebasePairRepository implements PairRepository {
   @override
   Stream<List<Pair>> findPairs(int limit,
       [DateTime startAfter, int offset]) {
-    var refPairs = pairsCollection.orderBy('date', descending: true).limit(limit);
+    var refPairs = pairsCollection
+        .where('validated', isEqualTo: true)
+        .orderBy('date', descending: true)
+        .limit(limit);
 
     if (startAfter != null) {
       refPairs = refPairs.startAfter([startAfter]);

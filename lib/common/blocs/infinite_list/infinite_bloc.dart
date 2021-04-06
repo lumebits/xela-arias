@@ -8,6 +8,7 @@ import 'package:image_repository/image_repository.dart';
 import 'package:poem_repository/poem_repository.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 
 part 'infinite_event.dart';
 
@@ -68,13 +69,15 @@ class InfiniteBloc extends Bloc<InfiniteEvent, InfiniteState> {
     switch (type) {
       case EntityType.PAIR:
         var pairs = await fetchPairs(lastDate, offset);
-        return pairs.map((e) => GenericCard(e.id, e.poem['text'], e.poem['author'], e.image['url'], e.image['author'], e.first, e.date)).toList();
+        return pairs.map((e) => GenericCard(e.id, e.poem['text'], e.poem['author'], e.image['url'], e.image['author'], EnumToString.fromString(EntityType.values, e.first), e.date)).toList();
       case EntityType.IMAGE:
         var images = await fetchImages(lastDate, offset);
-        return images.map((e) => GenericCard(e.id, "?", "", e.url, e.author, "IMAGE", e.date)).toList();
+        return images.map((e) => GenericCard(e.id, "Preme aquí para engadir o teu poema para esta imaxe.", "", e.url, e.author, EntityType.IMAGE, e.date)).toList();
       case EntityType.POEM:
         var poems = await fetchPoems(lastDate, offset);
-        return poems.map((e) => GenericCard(e.id, e.text, e.author, xelaAriasImage, "", "POEM", e.date)).toList();
+        return poems.map((e) => GenericCard(e.id, e.text, e.author, xelaAriasImage, "", EntityType.POEM, e.date)).toList();
+      default:
+        return null;
     }
   }
 

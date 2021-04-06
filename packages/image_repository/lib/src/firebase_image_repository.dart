@@ -27,7 +27,10 @@ class FirebaseImageRepository implements ImageRepository {
   @override
   Stream<List<Image>> findImages(int limit,
       [DateTime startAfter, int offset]) {
-    var refImages = imagesCollection.orderBy('date', descending: true).limit(limit);
+    var refImages = imagesCollection
+        .where('validated', isEqualTo: true)
+        .orderBy('date', descending: true)
+        .limit(limit);
 
     if (startAfter != null) {
       refImages = refImages.startAfter([startAfter]);
