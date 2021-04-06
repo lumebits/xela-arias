@@ -8,7 +8,6 @@ import 'bottom_loader.dart';
 
 // TODO:
 //  - highlight "first"
-//  - save poem or text
 
 class GenericCardWidget extends StatelessWidget {
   final GenericCard card;
@@ -72,28 +71,46 @@ class PoemItem extends StatelessWidget {
   Widget _cardText(BuildContext context) {
     return Expanded(
       flex: 5,
-      child: InkWell(
-        onTap: () {
-          print("Poem tapped: " + card.id);
-          Navigator.pushNamed(context, XelaAriasRoutes.addPoem,
-              arguments: card);
-        },
-        onLongPress: () async {
-          print("Long pressed card: " + card.id);
-        },
-        child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: AutoSizeText(
-                card.text.replaceAll("_b","\n"),
-                maxLines: 18,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontStyle: FontStyle.italic
-                ),
+      child: Column(
+        children: [
+          ButtonBar(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.star_border),
+                onPressed: () {
+                  /* ... */
+                },
               ),
-            )),
+            ],
+          ),
+          InkWell(
+            onTap: () {
+              print("Poem tapped: " + card.id);
+              Navigator.pushNamed(context, XelaAriasRoutes.addPoem,
+                  arguments: card);
+            },
+            onLongPress: () async {
+              print("Long pressed card: " + card.id);
+            },
+            child: Column(
+              children: [
+                Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: AutoSizeText(
+                        card.text.replaceAll("_b","\n"),
+                        maxLines: 18,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontStyle: FontStyle.italic
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
