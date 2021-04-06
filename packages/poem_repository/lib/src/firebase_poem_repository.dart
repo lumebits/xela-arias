@@ -27,7 +27,10 @@ class FirebasePoemRepository implements PoemRepository {
   @override
   Stream<List<Poem>> findPoems(int limit,
       [DateTime startAfter, int offset]) {
-    var refPoems = poemsCollection.orderBy('date', descending: true).limit(limit);
+    var refPoems = poemsCollection
+        .where('validated', isEqualTo: true)
+        .orderBy('date', descending: true)
+        .limit(limit);
 
     if (startAfter != null) {
       refPoems = refPoems.startAfter([startAfter]);

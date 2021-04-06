@@ -1,13 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 import 'package:xela_arias/routes.dart';
 
 import 'bottom_loader.dart';
-
-// TODO:
-//  - highlight "first"
 
 class GenericCardWidget extends StatelessWidget {
   final GenericCard card;
@@ -20,38 +18,7 @@ class GenericCardWidget extends StatelessWidget {
         semanticContainer: true,
         clipBehavior: Clip.antiAlias,
         child: Row(
-            children: <Widget>[
-                Expanded(
-                  flex: 5,
-                    child: Container(
-                      child: InkWell(
-                        onTap: () {
-                          print("Image tapped: " + card.id);
-                          Navigator.pushNamed(context, XelaAriasRoutes.addImage,
-                              arguments: card);
-                        },
-                        onLongPress: () async {
-                          print("Long pressed card: " + card.id);
-                        },
-                        child: Hero(
-                          tag: card.id,
-                          child: Material(
-                            child: CachedNetworkImage(
-                              height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
-                              imageUrl: card.imageUrl,
-                              imageBuilder: (context, imageProvider) => Ink.image(
-                                fit: BoxFit.fill,
-                                image: imageProvider,
-                              ),
-                              placeholder: (context, url) => BottomLoader(),
-                            ),
-                          ),
-                        ),
-                      )
-                    )
-                ),
-                PoemItem(card: card),
-            ]
+            children: _getOrdered()
         ),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -60,8 +27,66 @@ class GenericCardWidget extends StatelessWidget {
         margin: EdgeInsets.all(10),
       );
   }
+
+  List<Widget> _getOrdered() {
+    if (card.first == EntityType.IMAGE) {
+      return [
+        ImageItem(card: card),
+        PoemItem(card: card)
+      ];
+    } else {
+      return [
+        PoemItem(card: card),
+        ImageItem(card: card)
+      ];
+    }
+  }
 }
 
+class ImageItem extends StatelessWidget {
+  final GenericCard card;
+
+  ImageItem({Key key, @required this.card}) : super(key: key);
+
+
+  Widget _cardImage(BuildContext context) {
+    return
+      Expanded(
+          flex: 5,
+          child: Container(
+              child: InkWell(
+                onTap: () {
+                  print("Image tapped: " + card.id);
+                  Navigator.pushNamed(context, XelaAriasRoutes.addImage,
+                      arguments: card);
+                },
+                onLongPress: () async {
+                  print("Long pressed card: " + card.id);
+                },
+                child: Hero(
+                  tag: card.id,
+                  child: Material(
+                    child: CachedNetworkImage(
+                      height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
+                      imageUrl: card.imageUrl,
+                      imageBuilder: (context, imageProvider) => Ink.image(
+                        fit: BoxFit.fill,
+                        image: imageProvider,
+                      ),
+                      placeholder: (context, url) => BottomLoader(),
+                    ),
+                  ),
+                ),
+              )
+          )
+      );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _cardImage(context);
+  }
+}
 
 class PoemItem extends StatelessWidget {
   final GenericCard card;
@@ -73,7 +98,7 @@ class PoemItem extends StatelessWidget {
       flex: 5,
       child: Column(
         children: [
-          ButtonBar(
+          /*ButtonBar(
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.star_border),
@@ -82,7 +107,7 @@ class PoemItem extends StatelessWidget {
                 },
               ),
             ],
-          ),
+          ),*/
           InkWell(
             onTap: () {
               print("Poem tapped: " + card.id);
@@ -99,10 +124,10 @@ class PoemItem extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       child: AutoSizeText(
                         card.text.replaceAll("_b","\n"),
-                        maxLines: 18,
+                        maxLines: 30,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 13,
+                          fontSize: 12,
                           fontStyle: FontStyle.italic
                         ),
                       ),
