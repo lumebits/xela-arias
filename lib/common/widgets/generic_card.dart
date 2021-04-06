@@ -70,7 +70,7 @@ class ImageItem extends StatelessWidget {
                       height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
                       imageUrl: card.imageUrl,
                       imageBuilder: (context, imageProvider) => Ink.image(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         image: imageProvider,
                       ),
                       placeholder: (context, url) => BottomLoader(),
@@ -96,8 +96,9 @@ class PoemItem extends StatelessWidget {
   Widget _cardText(BuildContext context) {
     return Expanded(
       flex: 5,
-      child: Column(
-        children: [
+      child: Container(
+        constraints: BoxConstraints(minHeight: 200),
+        child:
           /*ButtonBar(
             children: <Widget>[
               IconButton(
@@ -117,8 +118,8 @@ class PoemItem extends StatelessWidget {
             onLongPress: () async {
               print("Long pressed card: " + card.id);
             },
-            child: Column(
-              children: [
+            child: Container(
+              child:
                 Center(
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -132,10 +133,8 @@ class PoemItem extends StatelessWidget {
                         ),
                       ),
                     )),
-              ],
             ),
           ),
-        ],
       ),
     );
   }
