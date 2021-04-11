@@ -3,8 +3,10 @@ class XelaAriasRoutes {
   static final classroom = '/classroom';
   static final poems = '/poems';
   static final images = '/images';
-  static final contribute = '/contribute';
-  static final detail = '/detail';
-  static final addPoem = '/poems/add';
-  static final addImage = '/images/add';
+
+  static final pickPoem = '/poems/pick';
+  static final pickImage = '/images/pick';
+
+  static final viewPoeam = '/poems/view';
+  static final viewImage = '/images/view';
 }

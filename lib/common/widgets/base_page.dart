@@ -7,12 +7,13 @@ abstract class BasePage extends StatelessWidget {
   final AppTab appTab;
   final bool withBackButton;
   final String title;
-  final List<Widget> actions;
 
-  const BasePage(Key key, {this.appTab, this.withBackButton = false, this.title, this.actions})
+  const BasePage(Key key, {this.appTab, this.withBackButton = false, this.title})
       : super(key: key);
 
   Widget bottomNavigationBar() => NavigationWidget(activeTab: appTab);
+
+  List<Widget> actions(BuildContext context) => null;
 
   Widget floatingActionButton(BuildContext context) => null;
 
@@ -35,7 +36,7 @@ abstract class BasePage extends StatelessWidget {
             ),
       centerTitle: true,
       backgroundColor: Color(0xFFADD7D6),
-      actions: actions,
+      actions: actions(context),
     );
   }
 
