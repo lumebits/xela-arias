@@ -3,15 +3,34 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/images/bloc/detail_bloc.dart';
+import 'package:xela_arias/navigation/model/app_tab.dart';
 
-class ImageDetailImpl extends StatelessWidget {
+class ImageDetailImpl extends BasePage {
   final File image;
 
-  ImageDetailImpl(this.image);
+  ImageDetailImpl(this.image, {Key key})
+      : super(key, appTab: AppTab.images);
 
   @override
-  Widget build(BuildContext context) {
+  List<Widget> actions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(
+          Icons.save,
+          color: Colors.white,
+        ),
+        onPressed: () => context.read<DetailBloc>().add(InsertEvent()),
+      )
+    ];
+  }
+
+  @override
+  Widget bottomNavigationBar() => null;
+
+  @override
+  Widget widget(BuildContext context) {
     return BlocBuilder<DetailBloc, String>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
