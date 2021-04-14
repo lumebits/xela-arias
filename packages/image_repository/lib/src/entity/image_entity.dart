@@ -9,8 +9,9 @@ class ImageEntity extends Equatable {
   final String author;
   final String classroom;
   final DateTime date;
+  final bool validated;
 
-  const ImageEntity(this.id, this.url, this.author, this.classroom, this.date);
+  const ImageEntity(this.id, this.url, this.author, this.classroom, this.date, this.validated);
 
   Map<String, Object> toJson() {
     return {
@@ -19,15 +20,16 @@ class ImageEntity extends Equatable {
       "author": author,
       "classroom": classroom,
       "date": date,
+      "validated": validated,
     };
   }
 
   @override
-  List<Object> get props => [id, url, author, classroom, date];
+  List<Object> get props => [id, url, author, classroom, date, validated];
 
   @override
   String toString() {
-    return 'ImageEntity { id: $id, url: $url, author: $author, classroom: $classroom, date: $date }';
+    return 'ImageEntity { id: $id, url: $url, author: $author, classroom: $classroom, date: $date, validated: $validated }';
   }
 
   static ImageEntity fromJson(Map<String, Object> json) {
@@ -37,6 +39,7 @@ class ImageEntity extends Equatable {
       json.containsKey("author") ? json["author"] as String : null,
       json.containsKey("classroom") ? json["classroom"] as String : null,
       json.containsKey("date") ? json["date"] as DateTime : null,
+      json.containsKey("validated") ? json["validated"] as bool : null,
     );
   }
 
@@ -47,6 +50,7 @@ class ImageEntity extends Equatable {
       snap.get('author'),
       snap.get('classroom'),
       snap.get('date').toDate(),
+      snap.get('validated'),
     );
   }
 
@@ -56,6 +60,7 @@ class ImageEntity extends Equatable {
       "author": author,
       "classroom": classroom,
       "date": date,
+      "validated": validated,
     };
   }
 }

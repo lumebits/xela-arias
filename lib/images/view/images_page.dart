@@ -32,11 +32,11 @@ class ImagesPage extends BasePage {
   }
 
   _pickImage(BuildContext context) async {
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 200.0, maxHeight: 300.0);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       File croppedFile = await ImageCropper.cropImage(
           sourcePath: image.path,
-          aspectRatio: CropAspectRatio(ratioX: 1080, ratioY: 1920),
+          aspectRatio: CropAspectRatio(ratioX: 9, ratioY: 16),
           androidUiSettings: AndroidUiSettings(
               toolbarTitle: 'Nova imaxe',
               toolbarColor: Color(0xFFADD7D6),
@@ -49,7 +49,7 @@ class ImagesPage extends BasePage {
               rotateButtonsHidden: true
           ));
       if (croppedFile != null) {
-        Navigator.pushNamed(context, XelaAriasRoutes.viewImage, arguments: ImageArgs(croppedFile));
+        Navigator.pushNamed(context, XelaAriasRoutes.viewImage, arguments: croppedFile);
       }
     }
   }
@@ -65,10 +65,4 @@ class ImagesPage extends BasePage {
     );
   }
 
-}
-
-class ImageArgs {
-  final File image;
-
-  ImageArgs(this.image);
 }

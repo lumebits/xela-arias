@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:sqflite/sqflite.dart';
 
@@ -50,7 +51,7 @@ class SqliteLocalImageRepository implements ImageRepository {
   }
 
   @override
-  Future insert(Image image) async {
+  Future insert(Image image, File imageFile) async {
     await db.insert(imageTable, <String, dynamic>{
       columnId: image.id,
       columnUrl: image.url

@@ -9,8 +9,9 @@ class PoemEntity extends Equatable {
   final String author;
   final String classroom;
   final DateTime date;
+  final bool validated;
 
-  const PoemEntity(this.id, this.text, this.author, this.classroom, this.date);
+  const PoemEntity(this.id, this.text, this.author, this.classroom, this.date, this.validated);
 
   Map<String, Object> toJson() {
     return {
@@ -19,15 +20,16 @@ class PoemEntity extends Equatable {
       "author": author,
       "classroom": classroom,
       "date": date,
+      "validated": validated,
     };
   }
 
   @override
-  List<Object> get props => [id, text, author, classroom, date];
+  List<Object> get props => [id, text, author, classroom, date, validated];
 
   @override
   String toString() {
-    return 'PoemEntity { id: $id, text: $text, author: $author, classroom: $classroom, date: $date }';
+    return 'PoemEntity { id: $id, text: $text, author: $author, classroom: $classroom, date: $date, validated: $validated }';
   }
 
   static PoemEntity fromJson(Map<String, Object> json) {
@@ -37,6 +39,7 @@ class PoemEntity extends Equatable {
       json.containsKey("author") ? json["author"] as String : null,
       json.containsKey("classroom") ? json["classroom"] as String : null,
       json.containsKey("date") ? json["date"] as DateTime : null,
+      json.containsKey("validated") ? json["validated"] as bool : null,
     );
   }
 
@@ -47,6 +50,7 @@ class PoemEntity extends Equatable {
       snap.get('author'),
       snap.get('classroom'),
       snap.get('date').toDate(),
+      snap.get('validated'),
     );
   }
 
@@ -56,6 +60,7 @@ class PoemEntity extends Equatable {
       "author": author,
       "classroom": classroom,
       "date": date,
+      "validated": validated,
     };
   }
 }

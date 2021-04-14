@@ -7,6 +7,6 @@ class XelaAriasRoutes {
   static final pickPoem = '/poems/pick';
   static final pickImage = '/images/pick';
 
-  static final viewPoeam = '/poems/view';
+  static final viewPoem = '/poems/view';
   static final viewImage = '/images/view';
 }

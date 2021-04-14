@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +45,9 @@ class FirebaseImageRepository implements ImageRepository {
   }
 
   @override
-  Future insert(Image image) {
+  Future insert(Image image, File file) {
+    print(image);
+    print(file);
     throw UnimplementedError();
   }
 

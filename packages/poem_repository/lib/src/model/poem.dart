@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import '../entity/entities.dart';
 
@@ -8,8 +9,9 @@ class Poem {
   final String author;
   final String classroom;
   final DateTime date;
+  final bool validated;
 
-  Poem(this.id, this.text, this.author, this.classroom, this.date);
+  Poem(this.id, this.text, this.author, this.classroom, this.date, this.validated);
 
   @override
   int get hashCode =>
@@ -17,7 +19,8 @@ class Poem {
       text.hashCode ^
       author.hashCode ^
       classroom.hashCode ^
-      date.hashCode;
+      date.hashCode ^
+      validated.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -28,15 +31,16 @@ class Poem {
               text == other.text &&
               author == other.author &&
               classroom == other.classroom &&
-              date == other.date;
+              date == other.date &&
+              validated == other.validated;
 
   @override
   String toString() {
-    return 'Poem { id: $id, text: $text, author: $author, classroom: $classroom, date: $date }';
+    return 'Poem { id: $id, text: $text, author: $author, classroom: $classroom, date: $date, validated: $validated }';
   }
 
   PoemEntity toEntity() {
-    return PoemEntity(id, text, author, classroom, date);
+    return PoemEntity(id, text, author, classroom, date, validated);
   }
 
   static Poem fromEntity(PoemEntity entity) {
@@ -46,6 +50,7 @@ class Poem {
       entity.author,
       entity.classroom,
       entity.date,
+      entity.validated,
     );
   }
 }

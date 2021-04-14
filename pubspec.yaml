@@ -39,7 +39,6 @@ dependencies:
   enum_to_string: ^1.0.14
   image_picker: ^0.6.7+22
   image_cropper: ^1.4.0
-  firebase_storage: ^4.0.0
   #social_share:
   #  git:
   #    url: git://github.com/ShekarMudaliyar/social_share.git

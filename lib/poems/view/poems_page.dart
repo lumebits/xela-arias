@@ -11,6 +11,8 @@ import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/common/widgets/infinite_page.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 
+import '../../routes.dart';
+
 class PoemsPage extends BasePage {
 
   @override
@@ -22,7 +24,7 @@ class PoemsPage extends BasePage {
           color: Colors.white,
         ),
         onPressed: () {
-          print("Add poem.");
+          Navigator.pushNamed(context, XelaAriasRoutes.viewPoem);
         },
       )
     ];
