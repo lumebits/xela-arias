@@ -17,6 +17,8 @@ class DetailBloc extends Bloc<DetailEvent, String> {
   Stream<String> mapEventToState(DetailEvent event) async* {
     if (event is EditAuthorEvent) {
       this.author = event.author;
+    } if (event is EditPoemEvent) {
+      this.poem = event.poem;
     } else if (event is InsertEvent) {
       savePoem();
     }
