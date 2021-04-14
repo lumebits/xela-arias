@@ -57,7 +57,7 @@ class ImageItem extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   print("Image tapped: " + card.id);
-                  Navigator.pushNamed(context, XelaAriasRoutes.addImage,
+                  Navigator.pushNamed(context, XelaAriasRoutes.pickImage,
                       arguments: card);
                 },
                 onLongPress: () async {
@@ -112,7 +112,7 @@ class PoemItem extends StatelessWidget {
           InkWell(
             onTap: () {
               print("Poem tapped: " + card.id);
-              Navigator.pushNamed(context, XelaAriasRoutes.addPoem,
+              Navigator.pushNamed(context, XelaAriasRoutes.pickPoem,
                   arguments: card);
             },
             onLongPress: () async {

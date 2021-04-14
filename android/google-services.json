@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1072952038358",
+    "firebase_url": "https://xela-arias-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "xela-arias",
+    "storage_bucket": "xela-arias.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072952038358:android:0e4e6577ab87d394364a77",
+        "android_client_info": {
+          "package_name": "com.lumebits.xelaarias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072952038358-jn7isc5psvkuu65oo71mgidp8sdkb4v7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8g7KcKqnR6cV5-hkJMTBoO8u8JnJyySc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072952038358-jn7isc5psvkuu65oo71mgidp8sdkb4v7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1072952038358-r06gdoi81ec36fp401rd54skcef1a68f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lumebits.xelaarias"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

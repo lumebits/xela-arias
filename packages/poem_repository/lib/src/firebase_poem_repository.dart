@@ -44,8 +44,15 @@ class FirebasePoemRepository implements PoemRepository {
   }
 
   @override
-  Future insert(Poem poem) {
-    throw UnimplementedError();
+  Future insert(Poem poem) async {
+    await poemsCollection
+      .add({
+        'author': poem.author,
+        'classroom': poem.classroom,
+        'date': poem.date,
+        'text': poem.text,
+        'validated': poem.validated,
+      });
   }
 
   @override

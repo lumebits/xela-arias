@@ -11,19 +11,26 @@ import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/common/widgets/infinite_page.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 
+import '../../routes.dart';
+
 class PoemsPage extends BasePage {
-  final actions = <Widget>[
-    IconButton(
-      icon: Icon(
-        Icons.add,
-        color: Colors.white,
-      ),
-      onPressed: () {
-        print("Add poem.");
-      },
-    )
-  ];
-  PoemsPage({Key key, List<Widget> actions}) : super(key, appTab: AppTab.poems, actions: actions);
+
+  @override
+  List<Widget> actions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, XelaAriasRoutes.viewPoem);
+        },
+      )
+    ];
+  }
+
+  PoemsPage({Key key, List<Widget> actions}) : super(key, appTab: AppTab.poems);
 
   @override
   Widget widget(BuildContext context) {
