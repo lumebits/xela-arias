@@ -89,7 +89,7 @@ class ImageItem extends StatelessWidget {
     return _cardImage(context);
   }
 
-
+  // TODO: refactor, to have this method only in one place
   _pickImage(BuildContext context) async {
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image != null) {
