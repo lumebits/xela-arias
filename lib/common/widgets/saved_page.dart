@@ -14,6 +14,7 @@ class SavedPage extends BasePage {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: AutoSizeText(
+              // TODO: add a better text
               "Poema ou imaxe gardado con éxito. Pendente de revisión.",
               maxLines: 30,
               style: TextStyle(

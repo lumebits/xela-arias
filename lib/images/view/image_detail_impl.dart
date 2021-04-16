@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/images/bloc/detail_bloc.dart';
+import 'package:xela_arias/images/bloc/file_card.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 
-class ImageDetailImpl extends BasePage {
-  final File image;
+import '../../routes.dart';
 
-  ImageDetailImpl(this.image, {Key key})
+class ImageDetailImpl extends BasePage {
+  final FileAndCard fileAndCard;
+
+  ImageDetailImpl(this.fileAndCard, {Key key})
       : super(key, appTab: AppTab.images);
 
   @override
@@ -21,7 +24,10 @@ class ImageDetailImpl extends BasePage {
           Icons.save,
           color: Colors.white,
         ),
-        onPressed: () => context.read<DetailBloc>().add(InsertEvent()),
+        onPressed: () {
+          context.read<DetailBloc>().add(InsertEvent(this.fileAndCard.card));
+          Navigator.pushNamed(context, XelaAriasRoutes.saved);
+        },
       )
     ];
   }
@@ -54,7 +60,7 @@ class ImageDetailImpl extends BasePage {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.file(image),
+                child: Image.file(fileAndCard.image),
               )
             ],
           ),
