@@ -67,8 +67,6 @@ class FirebaseImageRepository implements ImageRepository {
             })
         } ,
     );
-
-
   }
 
   @override
