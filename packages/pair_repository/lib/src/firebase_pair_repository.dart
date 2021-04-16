@@ -44,8 +44,16 @@ class FirebasePairRepository implements PairRepository {
   }
 
   @override
-  Future insert(Pair pair) {
-    throw UnimplementedError();
+  Future insert(Pair pair) async {
+    await pairsCollection
+      .add({
+        'classroom': pair.classroom,
+        'date': pair.date,
+        'first': pair.first,
+        'validated': pair.validated,
+        'image': pair.image,
+        'poem': pair.poem
+      });
   }
 
   @override

@@ -3,6 +3,7 @@ class XelaAriasRoutes {
   static final classroom = '/classroom';
   static final poems = '/poems';
   static final images = '/images';
+  static final saved = '/saved';
 
   static final pickPoem = '/poems/pick';
   static final pickImage = '/images/pick';

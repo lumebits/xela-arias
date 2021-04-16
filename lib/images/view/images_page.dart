@@ -10,6 +10,7 @@ import 'package:xela_arias/common/blocs/infinite_list/infinite_bloc.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/common/widgets/infinite_page.dart';
+import 'package:xela_arias/images/bloc/file_card.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 import 'package:pair_repository/pair_repository.dart';
 import 'package:image_repository/image_repository.dart';
@@ -49,7 +50,9 @@ class ImagesPage extends BasePage {
               rotateButtonsHidden: true
           ));
       if (croppedFile != null) {
-        Navigator.pushNamed(context, XelaAriasRoutes.viewImage, arguments: croppedFile);
+        var fileAndCard = FileAndCard(croppedFile, null);
+        Navigator.pushNamed(context, XelaAriasRoutes.viewImage, arguments: fileAndCard);
+        //Navigator.pushNamed(context, XelaAriasRoutes.viewImage, arguments: croppedFile);
       }
     }
   }

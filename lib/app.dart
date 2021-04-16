@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xela_arias/common/widgets/saved_page.dart';
 import 'package:xela_arias/home/home.dart';
 import 'package:xela_arias/images/view/image_detail.dart';
 import 'package:xela_arias/poems/view/poem_detail.dart';
@@ -28,7 +29,9 @@ class App extends StatelessWidget {
                 } else if (settings.name == XelaAriasRoutes.viewImage) {
                   return ImageDetail(settings.arguments);
                 } else if (settings.name == XelaAriasRoutes.viewPoem) {
-                  return PoemDetail();
+                  return PoemDetail(settings.arguments);
+                } else if (settings.name == XelaAriasRoutes.saved) {
+                  return SavedPage();
                 } else {
                     return HomePage();
                 }

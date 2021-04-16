@@ -9,8 +9,9 @@ class Pair {
   final String first;
   final Map<String, dynamic> image;
   final Map<String, dynamic> poem;
+  final bool validated;
 
-  Pair(this.id, this.classroom, this.date, this.first, this.image, this.poem);
+  Pair(this.id, this.classroom, this.date, this.first, this.image, this.poem, this.validated);
 
   @override
   int get hashCode =>
@@ -19,7 +20,8 @@ class Pair {
       date.hashCode ^
       first.hashCode ^
       image.hashCode ^
-      poem.hashCode;
+      poem.hashCode ^
+      validated.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -31,15 +33,16 @@ class Pair {
               date == other.date &&
               first == other.first &&
               image == other.image &&
-              poem == other.poem;
+              poem == other.poem &&
+              validated == other.validated;
 
   @override
   String toString() {
-    return 'Pair { id: $id, classroom: $classroom, date: $date, first: $first, image: $image, poem: $poem }';
+    return 'Pair { id: $id, classroom: $classroom, date: $date, first: $first, image: $image, poem: $poem, validated: $validated }';
   }
 
   PairEntity toEntity() {
-    return PairEntity(id, classroom, date, first, image, poem);
+    return PairEntity(id, classroom, date, first, image, poem, validated);
   }
 
   static Pair fromEntity(PairEntity entity) {
@@ -50,6 +53,7 @@ class Pair {
       entity.first,
       entity.image,
       entity.poem,
+      entity.validated,
     );
   }
 }

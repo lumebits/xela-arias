@@ -65,10 +65,9 @@ class FirebaseImageRepository implements ImageRepository {
               'url': value,
               'validated': image.validated,
             })
-        } ,
+        }
     );
-
-
+    return taskSnapshot.ref.getDownloadURL();
   }
 
   @override

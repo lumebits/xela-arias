@@ -7,7 +7,11 @@ abstract class DetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class InsertEvent extends DetailEvent {}
+class InsertEvent extends DetailEvent {
+  final GenericCard card;
+
+  const InsertEvent(this.card);
+}
 
 class EditAuthorEvent extends DetailEvent {
   final String author;

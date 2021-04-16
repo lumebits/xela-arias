@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:xela_arias/common/models/GenericCard.dart';
 import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 import 'package:xela_arias/poems/bloc/detail_bloc.dart';
 
-class PoemDetailImpl extends BasePage {
+import '../../routes.dart';
 
-  PoemDetailImpl({Key key})
+class PoemDetailImpl extends BasePage {
+  final GenericCard card;
+
+  PoemDetailImpl(this.card, {Key key})
       : super(key, appTab: AppTab.poems);
 
   @override
@@ -18,7 +22,10 @@ class PoemDetailImpl extends BasePage {
           Icons.save,
           color: Colors.white,
         ),
-        onPressed: () => context.read<DetailBloc>().add(InsertEvent()),
+        onPressed: () {
+          context.read<DetailBloc>().add(InsertEvent(this.card));
+          Navigator.pushNamed(context, XelaAriasRoutes.saved);
+        },
       )
     ];
   }
