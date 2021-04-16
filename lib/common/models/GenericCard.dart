@@ -8,6 +8,7 @@ class GenericCard {
   final String imageAuthor;
   final EntityType first;
   final DateTime date;
+  final EntityType actualTab;
 
-  GenericCard(this.id, this.text, this.textAuthor, this.imageUrl, this.imageAuthor, this.first, this.date);
+  GenericCard(this.id, this.text, this.textAuthor, this.imageUrl, this.imageAuthor, this.first, this.date, this.actualTab);
 }

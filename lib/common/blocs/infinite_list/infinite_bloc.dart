@@ -15,7 +15,7 @@ part 'infinite_event.dart';
 part 'infinite_state.dart';
 
 const cardsToLoad = 25;
-const xelaAriasImage = "https://firebasestorage.googleapis.com/v0/b/xela-arias.appspot.com/o/xela_arias.jpg?alt=media&token=31fac2b0-d442-44c5-ad30-561c1a3600e2";
+const xelaAriasImage = "https://firebasestorage.googleapis.com/v0/b/xela-arias.appspot.com/o/xela_arias_poem.jpg?alt=media&token=694e208d-d8c8-4061-bff4-2e8cb7734fb8";
 
 class InfiniteBloc extends Bloc<InfiniteEvent, InfiniteState> {
   final PairRepository pairRepository;
@@ -69,13 +69,13 @@ class InfiniteBloc extends Bloc<InfiniteEvent, InfiniteState> {
     switch (type) {
       case EntityType.PAIR:
         var pairs = await fetchPairs(lastDate, offset);
-        return pairs.map((e) => GenericCard(e.id, e.poem['text'], e.poem['author'], e.image['url'], e.image['author'], EnumToString.fromString(EntityType.values, e.first), e.date)).toList();
+        return pairs.map((e) => GenericCard(e.id, e.poem['text'], e.poem['author'], e.image['url'], e.image['author'], EnumToString.fromString(EntityType.values, e.first), e.date, EntityType.PAIR)).toList();
       case EntityType.IMAGE:
         var images = await fetchImages(lastDate, offset);
-        return images.map((e) => GenericCard(e.id, "Preme aquí para engadir o teu poema para esta imaxe.", "", e.url, e.author, EntityType.IMAGE, e.date)).toList();
+        return images.map((e) => GenericCard(e.id, "Preme aquí para engadir o teu poema para esta imaxe.", "", e.url, e.author, EntityType.IMAGE, e.date, EntityType.IMAGE)).toList();
       case EntityType.POEM:
         var poems = await fetchPoems(lastDate, offset);
-        return poems.map((e) => GenericCard(e.id, e.text, e.author, xelaAriasImage, "", EntityType.POEM, e.date)).toList();
+        return poems.map((e) => GenericCard(e.id, e.text, e.author, xelaAriasImage, "", EntityType.POEM, e.date, EntityType.POEM)).toList();
       default:
         return null;
     }
