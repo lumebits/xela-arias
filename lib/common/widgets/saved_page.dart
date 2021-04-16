@@ -12,16 +12,23 @@ class SavedPage extends BasePage {
     return
       Center(
           child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: AutoSizeText(
-              // TODO: add a better text
-              "Poema ou imaxe gardado con éxito. Pendente de revisión.",
-              maxLines: 30,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontStyle: FontStyle.italic
-              ),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Imaxe ou poema gardado con éxito!\n(Aínda non está visible xa que está pendente de revisión)",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 17,
+                      fontStyle: FontStyle.italic
+                  ),
+                ),
+                SizedBox(height: 30),
+                Image.asset("assets/xela-saved.png")
+              ],
             ),
           ));
   }
