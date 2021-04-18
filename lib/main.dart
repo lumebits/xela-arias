@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
   await FirebasePairRepository().initialize();
   await FirebaseImageRepository().initialize();
   await FirebasePoemRepository().initialize();
+  await FirebaseAuth.instance.signInAnonymously();
   runApp(App());
 }
 

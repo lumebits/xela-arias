@@ -50,10 +50,10 @@ class FirebaseImageRepository implements ImageRepository {
   @override
   Future insert(Image image, File file) async {
     String fileName = getRandomString(15) + basename(file.path);
-    StorageReference firebaseStorageRef =
+    Reference firebaseStorageRef =
       FirebaseStorage.instance.ref().child('/$fileName');
-    StorageUploadTask uploadTask = firebaseStorageRef.putFile(file);
-    StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+    UploadTask uploadTask = firebaseStorageRef.putFile(file);
+    TaskSnapshot taskSnapshot = uploadTask.snapshot;
     taskSnapshot.ref.getDownloadURL().then(
         (value) => {
           print("Done: $value"),

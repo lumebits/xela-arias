@@ -1,10 +1,6 @@
-import 'dart:io';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 import 'package:xela_arias/common/pick_image.dart';
