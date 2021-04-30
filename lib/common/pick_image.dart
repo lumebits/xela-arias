@@ -11,8 +11,10 @@ import '../routes.dart';
 
 class PickImage {
 
+  final _picker = ImagePicker();
+
   pickImage(BuildContext context, GenericCard card) async {
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    PickedFile image = await _picker.getImage(source: ImageSource.gallery);
     if (image != null) {
       File croppedFile = await ImageCropper.cropImage(
           sourcePath: image.path,
