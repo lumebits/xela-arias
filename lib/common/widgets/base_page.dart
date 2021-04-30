@@ -5,10 +5,9 @@ import 'package:xela_arias/theme.dart';
 
 abstract class BasePage extends StatelessWidget {
   final AppTab appTab;
-  final bool withBackButton;
   final String title;
 
-  const BasePage(Key key, {this.appTab, this.withBackButton = false, this.title})
+  const BasePage(Key key, {this.appTab, this.title})
       : super(key: key);
 
   Widget bottomNavigationBar() => NavigationWidget(activeTab: appTab);
@@ -21,13 +20,7 @@ abstract class BasePage extends StatelessWidget {
 
   Widget appBar(context) {
     return AppBar(
-      leading: withBackButton
-          ? IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-              color: Colors.black,
-            )
-          : null,
+      leading: null,
       title: title != null
           ? Text(title, style: TextStyle(color: Colors.white))
           : Container(
