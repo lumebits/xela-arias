@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pair_repository/pair_repository.dart';
-import 'package:poem_repository/poem_repository.dart';
+import 'package:xela_repository/pair_repository.dart';
+import 'package:xela_repository/poem_repository.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 
@@ -25,10 +25,11 @@ class DetailBloc extends Bloc<DetailEvent, String> {
     } if (event is EditPoemEvent) {
       this.poem = event.poem;
     } else if (event is InsertEvent) {
-      savePoem();
       if (event.card != null) {
         this.card = event.card;
         createPair();
+      } else {
+        savePoem();
       }
     }
   }

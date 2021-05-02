@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:image_repository/image_repository.dart';
-import 'package:pair_repository/pair_repository.dart';
+import 'package:xela_repository/image_repository.dart';
+import 'package:xela_repository/pair_repository.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 
@@ -13,32 +13,33 @@ part 'detail_event.dart';
 class DetailBloc extends Bloc<DetailEvent, String> {
   final ImageRepository imageRepository;
   final PairRepository pairRepository;
-  final File imageFile;
+  final Uint8List image;
+  final String name;
   String author;
   GenericCard card;
 
-  DetailBloc(this.imageRepository, this.pairRepository, this.imageFile) : super("");
+  DetailBloc(this.imageRepository, this.pairRepository, this.image, this.name)
+      : super("");
 
   @override
   Stream<String> mapEventToState(DetailEvent event) async* {
     if (event is EditAuthorEvent) {
       this.author = event.author;
     } else if (event is InsertEvent) {
-      saveImage().then((imageUrl) {
-        if (event.card != null) {
-          this.card = event.card;
-          createPair(imageUrl);
-        }
-      });
+      if (event.card != null) {
+        createPair();
+      } else {
+        saveImage();
+      }
     }
   }
 
-  Future<String> saveImage() async {
+  saveImage() async {
     var imageData = new Image(null, null, author, "0", DateTime.now(), false);
-    return await imageRepository.insert(imageData, this.imageFile);
+    await imageRepository.insert(imageData, this.image, this.name);
   }
 
-  createPair(String imageUrl) async {
+  createPair() async {
     Map<String, dynamic> poemMap = new Map();
     poemMap['id'] = card.id;
     poemMap['author'] = card.textAuthor;
@@ -47,10 +48,9 @@ class DetailBloc extends Bloc<DetailEvent, String> {
     Map<String, dynamic> imageMap = new Map();
     imageMap['id'] = "";
     imageMap['author'] = author;
-    imageMap['url'] = imageUrl;
 
-    var pairData = new Pair(null, "0", DateTime.now(), EntityType.POEM.toString().split('.').last, imageMap, poemMap, false);
-    pairRepository.insert(pairData);
+    var pairData = new Pair(null, "0", DateTime.now(),
+        EntityType.POEM.toString().split('.').last, imageMap, poemMap, false);
+    pairRepository.insert(pairData, image: this.image, name: this.name);
   }
-
 }

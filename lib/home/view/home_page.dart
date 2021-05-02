@@ -7,9 +7,9 @@ import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/common/widgets/infinite_page.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
-import 'package:pair_repository/pair_repository.dart';
-import 'package:image_repository/image_repository.dart';
-import 'package:poem_repository/poem_repository.dart';
+import 'package:xela_repository/pair_repository.dart';
+import 'package:xela_repository/image_repository.dart';
+import 'package:xela_repository/poem_repository.dart';
 
 class HomePage extends BasePage {
   HomePage({Key key}) : super(key, appTab: AppTab.home);

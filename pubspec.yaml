@@ -27,12 +27,8 @@ dependencies:
   flutter_bloc: ^6.1.0
   equatable: ^1.2.5
   rxdart: ^0.23.1
-  poem_repository:
-    path: packages/poem_repository
-  image_repository:
-    path: packages/image_repository
-  pair_repository:
-    path: packages/pair_repository
+  xela_repository:
+    path: packages/xela_repository
   firebase_auth: ^1.1.0
   firebase_auth_web:
   cached_network_image: ^2.5.0

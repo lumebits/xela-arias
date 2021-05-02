@@ -62,15 +62,7 @@ class ImageDetailImpl extends BasePage {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Crop(
-                  shape: BoxShape.rectangle,
-                  controller: controller,
-                  child: Image.file(fileAndCard.image, fit: BoxFit.cover),
-                  helper: Container(
-                      decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                  )),
-                ),
+                child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
               )
             ],
           ),

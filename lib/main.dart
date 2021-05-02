@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:xela_arias/app.dart';
-import 'package:pair_repository/pair_repository.dart';
-import 'package:image_repository/image_repository.dart';
-import 'package:poem_repository/poem_repository.dart';
+import 'package:xela_repository/pair_repository.dart';
+import 'package:xela_repository/image_repository.dart';
+import 'package:xela_repository/poem_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

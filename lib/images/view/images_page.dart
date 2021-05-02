@@ -8,7 +8,7 @@ import 'package:xela_arias/common/pick_image.dart';
 import 'package:xela_arias/common/widgets/base_page.dart';
 import 'package:xela_arias/common/widgets/infinite_page.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
-import 'package:image_repository/image_repository.dart';
+import 'package:xela_repository/image_repository.dart';
 
 class ImagesPage extends BasePage {
 

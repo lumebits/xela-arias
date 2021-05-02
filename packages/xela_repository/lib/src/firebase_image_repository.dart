@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +16,7 @@ final imagesCollection = FirebaseFirestore.instance.collection('images');
 
 class FirebaseImageRepository implements ImageRepository {
   static final FirebaseImageRepository _firebaseImageRepository =
-  FirebaseImageRepository._internal();
+      FirebaseImageRepository._internal();
 
   FirebaseImageRepository._internal();
 
@@ -29,8 +31,7 @@ class FirebaseImageRepository implements ImageRepository {
   }
 
   @override
-  Stream<List<Image>> findImages(int limit,
-      [DateTime startAfter, int offset]) {
+  Stream<List<Image>> findImages(int limit, [DateTime startAfter, int offset]) {
     var refImages = imagesCollection
         .where('validated', isEqualTo: true)
         .orderBy('date', descending: true)
@@ -48,26 +49,22 @@ class FirebaseImageRepository implements ImageRepository {
   }
 
   @override
-  Future insert(Image image, File file) async {
-    String fileName = getRandomString(15) + basename(file.path);
+  Future insert(Image image, Uint8List uint8list, String name) async {
+    String fileName = getRandomString(15) + name;
     Reference firebaseStorageRef =
-      FirebaseStorage.instance.ref().child('/$fileName');
-    UploadTask uploadTask = firebaseStorageRef.putFile(file);
-    TaskSnapshot taskSnapshot = uploadTask.snapshot;
-    taskSnapshot.ref.getDownloadURL().then(
-        (value) => {
-          print("Done: $value"),
-          imagesCollection
-            .add({
-              'author': image.author,
-              'classroom': image.classroom,
-              'date': image.date,
-              'url': value,
-              'validated': image.validated,
-            })
-        }
-    );
-    return taskSnapshot.ref.getDownloadURL();
+        FirebaseStorage.instance.ref().child('/$fileName');
+
+    firebaseStorageRef.putData(uint8list).then(
+        (taskSnapshot) => taskSnapshot.ref.getDownloadURL().then((value) => {
+              print("Done: $value"),
+              imagesCollection.add({
+                'author': image.author,
+                'classroom': image.classroom,
+                'date': image.date,
+                'url': value,
+                'validated': image.validated,
+              })
+            }));
   }
 
   @override

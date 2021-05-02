@@ -317,13 +317,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  image_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/image_repository"
-      relative: true
-    source: path
-    version: "1.0.0"
   intl:
     dependency: transitive
     description:
@@ -366,13 +359,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  pair_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/pair_repository"
-      relative: true
-    source: path
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -443,13 +429,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  poem_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/poem_repository"
-      relative: true
-    source: path
-    version: "1.0.0"
   process:
     dependency: transitive
     description:
@@ -574,6 +553,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  xela_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/xela_repository"
+      relative: true
+    source: path
+    version: "1.0.0"
   xml:
     dependency: transitive
     description:
