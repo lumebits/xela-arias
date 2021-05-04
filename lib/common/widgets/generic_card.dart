@@ -109,9 +109,16 @@ class PoemItem extends StatelessWidget {
 
   Widget _cardText(BuildContext context) {
     var width = _calculateWidth(context);
+    String credits = "\n";
+    if (card.textAuthor.isNotEmpty) {
+      credits += "\nPoema: ${card.textAuthor}";
+    }
+    if (card.imageAuthor.isNotEmpty) {
+      credits += "\nImaxe: ${card.imageAuthor}";
+    }
     return Container(
       width: width,
-      constraints: BoxConstraints(minHeight: 200),
+      constraints: BoxConstraints(minHeight: width * (1920 / 1080), maxHeight: width * (1920 / 1080)),
       child:
         InkWell(
           onTap: () {
@@ -121,21 +128,20 @@ class PoemItem extends StatelessWidget {
                   arguments: card);
             }
           },
-          child: Container(
-            child:
-              Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: AutoSizeText(
-                      card.text.replaceAll("_b","\n"),
-                      maxLines: 30,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic
+          child: SingleChildScrollView(
+            child: Container(
+              child:
+                Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        card.text.replaceAll("_b","\n") + credits,
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic
+                        ),
                       ),
-                    ),
-                  )),
+                    )),
+            ),
           ),
         ),
     );

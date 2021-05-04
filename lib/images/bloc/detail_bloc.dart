@@ -9,8 +9,9 @@ import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 
 part 'detail_event.dart';
+part 'detail_state.dart';
 
-class DetailBloc extends Bloc<DetailEvent, String> {
+class DetailBloc extends Bloc<DetailEvent, DetailState> {
   final ImageRepository imageRepository;
   final PairRepository pairRepository;
   final Uint8List image;
@@ -19,22 +20,24 @@ class DetailBloc extends Bloc<DetailEvent, String> {
   GenericCard card;
 
   DetailBloc(this.imageRepository, this.pairRepository, this.image, this.name)
-      : super("");
+      : super(DetailInitial());
 
   @override
-  Stream<String> mapEventToState(DetailEvent event) async* {
+  Stream<DetailState> mapEventToState(DetailEvent event) async* {
     if (event is EditAuthorEvent) {
       this.author = event.author;
     } else if (event is InsertEvent) {
+      yield Uploading();
       if (event.card != null) {
-        createPair();
+        await createPair();
       } else {
-        saveImage();
+        await saveImage();
       }
+      yield UploadSuccess();
     }
   }
 
-  saveImage() async {
+  Future saveImage() async {
     var imageData = new Image(null, null, author, "0", DateTime.now(), false);
     await imageRepository.insert(imageData, this.image, this.name);
   }
@@ -51,6 +54,6 @@ class DetailBloc extends Bloc<DetailEvent, String> {
 
     var pairData = new Pair(null, "0", DateTime.now(),
         EntityType.POEM.toString().split('.').last, imageMap, poemMap, false);
-    pairRepository.insert(pairData, image: this.image, name: this.name);
+    await pairRepository.insert(pairData, image: this.image, name: this.name);
   }
 }

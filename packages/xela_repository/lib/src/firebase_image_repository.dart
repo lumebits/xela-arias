@@ -54,7 +54,7 @@ class FirebaseImageRepository implements ImageRepository {
     Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child('/$fileName');
 
-    firebaseStorageRef.putData(uint8list).then(
+    await firebaseStorageRef.putData(uint8list).then(
         (taskSnapshot) => taskSnapshot.ref.getDownloadURL().then((value) => {
               print("Done: $value"),
               imagesCollection.add({

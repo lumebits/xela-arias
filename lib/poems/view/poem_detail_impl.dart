@@ -11,22 +11,27 @@ import '../../routes.dart';
 class PoemDetailImpl extends BasePage {
   final GenericCard card;
 
-  PoemDetailImpl(this.card, {Key key})
-      : super(key, appTab: AppTab.poems);
+  PoemDetailImpl(this.card, {Key key}) : super(key, appTab: AppTab.poems);
 
   @override
   List<Widget> actions(BuildContext context) {
     return [
-      IconButton(
-        icon: Icon(
-          Icons.save,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          context.read<DetailBloc>().add(InsertEvent(this.card));
-          Navigator.pushNamed(context, XelaAriasRoutes.saved);
-        },
-      )
+      BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
+        if (state is DetailInitial || state is UploadFailure) {
+          return IconButton(
+            icon: Icon(
+              Icons.save,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context.read<DetailBloc>().add(InsertEvent(this.card));
+            },
+          );
+        } else {
+          return Container(
+              padding: EdgeInsets.all(10), child: CircularProgressIndicator());
+        }
+      })
     ];
   }
 
@@ -35,16 +40,21 @@ class PoemDetailImpl extends BasePage {
 
   @override
   Widget widget(BuildContext context) {
-    return BlocBuilder<DetailBloc, String>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return SingleChildScrollView(
+    return BlocListener<DetailBloc, DetailState>(
+        listener: (context, state) {
+          if (state is UploadSuccess) {
+            Navigator.pushNamedAndRemoveUntil(context, XelaAriasRoutes.saved,
+                ModalRoute.withName(XelaAriasRoutes.home));
+          }
+        },
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  onChanged: (value) => context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                  onChanged: (value) =>
+                      context.read<DetailBloc>().add(EditAuthorEvent(value)),
                   cursorColor: Colors.grey,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(color: Colors.black87),
@@ -62,7 +72,8 @@ class PoemDetailImpl extends BasePage {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   minLines: 10,
-                  onChanged: (value) => context.read<DetailBloc>().add(EditPoemEvent(value)),
+                  onChanged: (value) =>
+                      context.read<DetailBloc>().add(EditPoemEvent(value)),
                   cursorColor: Colors.grey,
                   decoration: InputDecoration(
                     alignLabelWithHint: true,
@@ -77,8 +88,6 @@ class PoemDetailImpl extends BasePage {
               )
             ],
           ),
-        );
-      },
-    );
+        ));
   }
 }
