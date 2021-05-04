@@ -1,3 +1,4 @@
+import 'package:crop/crop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +36,8 @@ class ImageDetailImpl extends BasePage {
 
   @override
   Widget widget(BuildContext context) {
+    final controller = CropController(aspectRatio: 9 / 16);
+
     return BlocBuilder<DetailBloc, String>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
@@ -44,7 +47,8 @@ class ImageDetailImpl extends BasePage {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  onChanged: (value) => context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                  onChanged: (value) =>
+                      context.read<DetailBloc>().add(EditAuthorEvent(value)),
                   cursorColor: Colors.grey,
                   decoration: InputDecoration(
                     labelStyle: TextStyle(color: Colors.black87),
@@ -58,7 +62,7 @@ class ImageDetailImpl extends BasePage {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.file(fileAndCard.image),
+                child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
               )
             ],
           ),

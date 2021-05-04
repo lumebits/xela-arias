@@ -7,6 +7,7 @@ import 'package:xela_arias/poems/view/poem_detail.dart';
 import 'package:xela_arias/poems/view/poems_page.dart';
 import 'package:xela_arias/routes.dart';
 
+import 'images/view/image_crop_page.dart';
 import 'images/view/images_page.dart';
 import 'routes.dart';
 
@@ -27,6 +28,8 @@ class App extends StatelessWidget {
                   return ImagesPage();
                 }  else if (settings.name == XelaAriasRoutes.poems) {
                   return PoemsPage();
+                } else if (settings.name == XelaAriasRoutes.cropImage) {
+                  return ImageCropPage(settings.arguments);
                 } else if (settings.name == XelaAriasRoutes.viewImage) {
                   return ImageDetail(settings.arguments);
                 } else if (settings.name == XelaAriasRoutes.viewPoem) {

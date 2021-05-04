@@ -46,6 +46,34 @@
     <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x" media="(prefers-color-scheme: dark)">
     <img class="center" src="splash/img/light-1x.png" />
   </picture>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyAVZsNxclhKLNPxEJkwK7AyPxmH3WFJupE",
+      authDomain: "xela-arias.firebaseapp.com",
+      databaseURL: "https://xela-arias-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "xela-arias",
+      storageBucket: "xela-arias.appspot.com",
+      messagingSenderId: "1072952038358",
+      appId: "1:1072952038358:web:137ff34a21a054df364a77",
+      measurementId: "G-V7BCC3EM80"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

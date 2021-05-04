@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:xela_arias/common/pick_image.dart';
 import 'package:xela_arias/routes.dart';
 
 import 'bottom_loader.dart';
+const double _cardMaxWidth = 1000;
 
 class GenericCardWidget extends StatelessWidget {
   final GenericCard card;
@@ -15,18 +18,24 @@ class GenericCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        semanticContainer: true,
-        clipBehavior: Clip.antiAlias,
-        child: Row(
-            children: _getOrdered()
-        ),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-        ),
-        elevation: 5,
-        margin: EdgeInsets.all(10),
-      );
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        constraints: BoxConstraints(maxWidth: _cardMaxWidth),
+        child: Card(
+            semanticContainer: true,
+            clipBehavior: Clip.antiAlias,
+            child: Row(
+                children: _getOrdered()
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+            ),
+            elevation: 5,
+            margin: EdgeInsets.all(10),
+          ),
+      ),
+    );
   }
 
   List<Widget> _getOrdered() {
@@ -49,34 +58,36 @@ class ImageItem extends StatelessWidget {
 
   ImageItem({Key key, @required this.card}) : super(key: key);
 
+  double _calculateWidth(BuildContext context) {
+    return min(MediaQuery.of(context).size.width / 2 - 10, _cardMaxWidth / 2 - 10);
+  }
 
   Widget _cardImage(BuildContext context) {
+    var width = _calculateWidth(context);
     return
-      Expanded(
-          flex: 5,
-          child: Container(
-              child: InkWell(
-                onTap: () {
-                  if (card.actualTab == EntityType.POEM) {
-                    print("Image tapped: " + card.id);
-                    PickImage().pickImage(context, card);
-                  }
-                },
-                child: Hero(
-                  tag: card.id,
-                  child: Material(
-                    child: CachedNetworkImage(
-                      height: (MediaQuery.of(context).size.width / 2 - 20) * (1920 / 1080),
-                      imageUrl: card.imageUrl,
-                      imageBuilder: (context, imageProvider) => Ink.image(
-                        fit: BoxFit.cover,
-                        image: imageProvider,
-                      ),
-                      placeholder: (context, url) => BottomLoader(),
-                    ),
+      Container(
+          width: width,
+          child: InkWell(
+            onTap: () {
+              if (card.actualTab == EntityType.POEM) {
+                print("Image tapped: " + card.id);
+                PickImage().pickImage(context, card);
+              }
+            },
+            child: Hero(
+              tag: card.id,
+              child: Material(
+                child: CachedNetworkImage(
+                  height: width * (1920 / 1080),
+                  imageUrl: card.imageUrl,
+                  imageBuilder: (context, imageProvider) => Ink.image(
+                    fit: BoxFit.cover,
+                    image: imageProvider,
                   ),
+                  placeholder: (context, url) => BottomLoader(),
                 ),
-              )
+              ),
+            ),
           )
       );
   }
@@ -92,38 +103,41 @@ class PoemItem extends StatelessWidget {
 
   PoemItem({Key key, @required this.card}) : super(key: key);
 
+  double _calculateWidth(BuildContext context) {
+    return min(MediaQuery.of(context).size.width / 2 - 10, _cardMaxWidth / 2 - 10);
+  }
+
   Widget _cardText(BuildContext context) {
-    return Expanded(
-      flex: 5,
-      child: Container(
-        constraints: BoxConstraints(minHeight: 200),
-        child:
-          InkWell(
-            onTap: () {
-              if (card.actualTab == EntityType.IMAGE) {
-                print("Poem tapped: " + card.id);
-                Navigator.pushNamed(context, XelaAriasRoutes.viewPoem,
-                    arguments: card);
-              }
-            },
-            child: Container(
-              child:
-                Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: AutoSizeText(
-                        card.text.replaceAll("_b","\n"),
-                        maxLines: 30,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic
-                        ),
+    var width = _calculateWidth(context);
+    return Container(
+      width: width,
+      constraints: BoxConstraints(minHeight: 200),
+      child:
+        InkWell(
+          onTap: () {
+            if (card.actualTab == EntityType.IMAGE) {
+              print("Poem tapped: " + card.id);
+              Navigator.pushNamed(context, XelaAriasRoutes.viewPoem,
+                  arguments: card);
+            }
+          },
+          child: Container(
+            child:
+              Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: AutoSizeText(
+                      card.text.replaceAll("_b","\n"),
+                      maxLines: 30,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic
                       ),
-                    )),
-            ),
+                    ),
+                  )),
           ),
-      ),
+        ),
     );
   }
 

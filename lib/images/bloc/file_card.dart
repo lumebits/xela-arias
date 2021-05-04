@@ -1,11 +1,12 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:xela_arias/common/models/GenericCard.dart';
 
 class FileAndCard {
-  final File image;
+  final Uint8List image;
+  final String fileName;
   final GenericCard card;
 
-  FileAndCard(this.image, this.card);
+  FileAndCard(this.image, this.fileName, this.card);
 
 }
