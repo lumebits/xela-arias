@@ -53,13 +53,14 @@ class _ImageCropPageState extends State<ImageCropPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crop Demo'),
+        backgroundColor: Color(0xFFADD7D6),
+        title: Text('A túa imaxe'),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
             onPressed: _cropImage,
             tooltip: 'Crop',
-            icon: Icon(Icons.crop),
+            icon: Icon(Icons.check),
           )
         ],
       ),

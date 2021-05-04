@@ -15,7 +15,7 @@ part 'infinite_event.dart';
 part 'infinite_state.dart';
 
 const cardsToLoad = 25;
-const xelaAriasImage = "https://firebasestorage.googleapis.com/v0/b/xela-arias.appspot.com/o/xela_arias_poem.jpg?alt=media&token=694e208d-d8c8-4061-bff4-2e8cb7734fb8";
+const xelaAriasImage = "https://firebasestorage.googleapis.com/v0/b/xela-arias.appspot.com/o/xela_placeholder.png?alt=media&token=4f131d00-5a1d-4f2f-bdd1-661d8b9e9d41";
 
 class InfiniteBloc extends Bloc<InfiniteEvent, InfiniteState> {
   final PairRepository pairRepository;
