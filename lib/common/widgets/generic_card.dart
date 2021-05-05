@@ -131,16 +131,15 @@ class PoemItem extends StatelessWidget {
           child: SingleChildScrollView(
             child: Container(
               child:
-                Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Text(
-                        card.text.replaceAll("_b","\n") + credits,
-                        style: TextStyle(
-                          fontStyle: FontStyle.italic
-                        ),
-                      ),
-                    )),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    card.text.replaceAll("_b","\n") + credits,
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic
+                    ),
+                  ),
+                ),
             ),
           ),
         ),

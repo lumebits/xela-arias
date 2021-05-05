@@ -17,7 +17,6 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   final Uint8List image;
   final String name;
   String author;
-  GenericCard card;
 
   DetailBloc(this.imageRepository, this.pairRepository, this.image, this.name)
       : super(DetailInitial());
@@ -29,7 +28,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     } else if (event is InsertEvent) {
       yield Uploading();
       if (event.card != null) {
-        await createPair();
+        await createPair(event.card);
       } else {
         await saveImage();
       }
@@ -42,7 +41,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     await imageRepository.insert(imageData, this.image, this.name);
   }
 
-  createPair() async {
+  createPair(GenericCard card) async {
     Map<String, dynamic> poemMap = new Map();
     poemMap['id'] = card.id;
     poemMap['author'] = card.textAuthor;
