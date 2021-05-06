@@ -7,6 +7,7 @@ import 'package:xela_arias/images/bloc/file_card.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 
 import '../../routes.dart';
+import '../../theme.dart';
 
 class ImageDetailImpl extends BasePage {
   final FileAndCard fileAndCard;
@@ -51,29 +52,34 @@ class ImageDetailImpl extends BasePage {
         }
       },
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) =>
-                    context.read<DetailBloc>().add(EditAuthorEvent(value)),
-                cursorColor: Colors.grey,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(color: Colors.black87),
-                  focusedBorder: new OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.grey)),
-                  enabledBorder: new OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.grey)),
-                  labelText: 'Nome do ou da autor/a da imaxe',
+        child: Container(
+          constraints: BoxConstraints(maxWidth: maxWidth),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, top: 15, right: 15, bottom: 10),
+                child: TextField(
+                  onChanged: (value) =>
+                      context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                  cursorColor: Colors.grey,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(color: Colors.black87),
+                    focusedBorder: new OutlineInputBorder(
+                        borderSide: new BorderSide(color: Colors.grey)),
+                    enabledBorder: new OutlineInputBorder(
+                        borderSide: new BorderSide(color: Colors.grey)),
+                    labelText: 'Nome do ou da autor/a da imaxe',
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, top: 5, right: 15, bottom: 15),
+                child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
+              )
+            ],
+          ),
         ),
       ),
     );

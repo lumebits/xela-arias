@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
@@ -8,6 +7,7 @@ import 'package:xela_arias/common/models/GenericCard.dart';
 import 'package:xela_arias/common/pick_image.dart';
 import 'package:xela_arias/routes.dart';
 
+import '../../theme.dart';
 import 'bottom_loader.dart';
 const double _cardMaxWidth = 1000;
 
@@ -21,7 +21,7 @@ class GenericCardWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        constraints: BoxConstraints(maxWidth: _cardMaxWidth),
+        constraints: BoxConstraints(maxWidth: maxWidth),
         child: Card(
             semanticContainer: true,
             clipBehavior: Clip.antiAlias,
