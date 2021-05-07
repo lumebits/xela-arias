@@ -1,13 +1,14 @@
 import 'dart:math';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
 import 'package:xela_arias/common/pick_image.dart';
 import 'package:xela_arias/routes.dart';
 
+import '../../theme.dart';
 import 'bottom_loader.dart';
 const double _cardMaxWidth = 1000;
 
@@ -21,7 +22,7 @@ class GenericCardWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Container(
-        constraints: BoxConstraints(maxWidth: _cardMaxWidth),
+        constraints: BoxConstraints(maxWidth: maxWidth),
         child: Card(
             semanticContainer: true,
             clipBehavior: Clip.antiAlias,
@@ -109,9 +110,16 @@ class PoemItem extends StatelessWidget {
 
   Widget _cardText(BuildContext context) {
     var width = _calculateWidth(context);
+    String credits = "\n";
+    if (card.textAuthor.isNotEmpty) {
+      credits += "\nPoema: ${card.textAuthor}";
+    }
+    if (card.imageAuthor.isNotEmpty) {
+      credits += "\nImaxe: ${card.imageAuthor}";
+    }
     return Container(
       width: width,
-      constraints: BoxConstraints(minHeight: 200),
+      constraints: BoxConstraints(maxHeight: width * (1920 / 1080)),
       child:
         InkWell(
           onTap: () {
@@ -121,21 +129,22 @@ class PoemItem extends StatelessWidget {
                   arguments: card);
             }
           },
-          child: Container(
-            child:
-              Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: AutoSizeText(
-                      card.text.replaceAll("_b","\n"),
-                      maxLines: 30,
+          child: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                child:
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      card.text.replaceAll("_b","\n") + credits,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic
+                        fontStyle: FontStyle.italic,
+                        fontSize: kIsWeb ? 18.0 : 14.0
                       ),
                     ),
-                  )),
+                  ),
+              ),
+            ),
           ),
         ),
     );

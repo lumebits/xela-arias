@@ -53,19 +53,20 @@ class FirebasePairRepository implements PairRepository {
       String fileName = getRandomString(15) + name;
       Reference firebaseStorageRef =
           FirebaseStorage.instance.ref().child('/$fileName');
-      UploadTask uploadTask = firebaseStorageRef.putData(image);
-      TaskSnapshot taskSnapshot = uploadTask.snapshot;
-      taskSnapshot.ref.getDownloadURL().then((value) => {
-            print("Done: $value"),
-            pairsCollection.add({
-              'classroom': pair.classroom,
-              'date': pair.date,
-              'first': pair.first,
-              'validated': pair.validated,
-              'image': pair.image,
-              'poem': pair.poem
-            })
-          });
+
+      await firebaseStorageRef.putData(image).then(
+          (taskSnapshot) => taskSnapshot.ref.getDownloadURL().then((value) => {
+                print("Done: $value"),
+                pair.image['url'] = value,
+                pairsCollection.add({
+                  'classroom': pair.classroom,
+                  'date': pair.date,
+                  'first': pair.first,
+                  'validated': pair.validated,
+                  'image': pair.image,
+                  'poem': pair.poem
+                })
+              }));
     }
   }
 

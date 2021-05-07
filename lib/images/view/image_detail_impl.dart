@@ -1,4 +1,3 @@
-import 'package:crop/crop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:xela_arias/images/bloc/file_card.dart';
 import 'package:xela_arias/navigation/model/app_tab.dart';
 
 import '../../routes.dart';
+import '../../theme.dart';
 
 class ImageDetailImpl extends BasePage {
   final FileAndCard fileAndCard;
@@ -18,16 +18,24 @@ class ImageDetailImpl extends BasePage {
   @override
   List<Widget> actions(BuildContext context) {
     return [
-      IconButton(
-        icon: Icon(
-          Icons.save,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          context.read<DetailBloc>().add(InsertEvent(this.fileAndCard.card));
-          Navigator.pushNamed(context, XelaAriasRoutes.saved);
-        },
-      )
+      BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
+        if (state is DetailInitial || state is UploadFailure) {
+          return IconButton(
+            icon: Icon(
+              Icons.save,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              context
+                  .read<DetailBloc>()
+                  .add(InsertEvent(this.fileAndCard.card));
+            },
+          );
+        } else {
+          return Container(
+              padding: EdgeInsets.all(10), child: CircularProgressIndicator());
+        }
+      })
     ];
   }
 
@@ -36,38 +44,48 @@ class ImageDetailImpl extends BasePage {
 
   @override
   Widget widget(BuildContext context) {
-    final controller = CropController(aspectRatio: 9 / 16);
-
-    return BlocBuilder<DetailBloc, String>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: (value) =>
-                      context.read<DetailBloc>().add(EditAuthorEvent(value)),
-                  cursorColor: Colors.grey,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black87),
-                    focusedBorder: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey)),
-                    enabledBorder: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey)),
-                    labelText: 'Nome do ou da autor/a da imaxe',
+    return BlocListener<DetailBloc, DetailState>(
+      listener: (context, state) {
+        if (state is UploadSuccess) {
+          Navigator.pushNamedAndRemoveUntil(context, XelaAriasRoutes.saved,
+              ModalRoute.withName(XelaAriasRoutes.home));
+        }
+      },
+      child: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 15, right: 15, bottom: 10),
+                  child: TextField(
+                    onChanged: (value) =>
+                        context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black87),
+                      focusedBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey)),
+                      enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey)),
+                      labelText: 'Nome do ou da autor/a da imaxe',
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 5, right: 15, bottom: 15),
+                  child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
+                )
+              ],
+            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

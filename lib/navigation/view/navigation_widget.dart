@@ -28,6 +28,7 @@ class NavigationWidget extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       borderRadius: 36,
       margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 28),
+      fontSize: kIsWeb ? 14.0 : 11.0,
       items: [
         FloatingNavbarItem(icon: Icons.image, title: "Imaxes"),
         FloatingNavbarItem(icon: Icons.home, title: "Galería"),
