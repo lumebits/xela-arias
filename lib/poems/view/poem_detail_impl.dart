@@ -49,49 +49,53 @@ class PoemDetailImpl extends BasePage {
           }
         },
         child: SingleChildScrollView(
-          child: Container(
-            constraints: BoxConstraints(maxWidth: maxWidth),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 15, right: 15, bottom: 10),
-                  child: TextField(
-                    onChanged: (value) =>
-                        context.read<DetailBloc>().add(EditAuthorEvent(value)),
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                      labelStyle: TextStyle(color: Colors.black87),
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.grey)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.grey)),
-                      labelText: 'Nome do ou da autor/a do poema',
+          child: Center(
+            child: Container(
+              constraints: BoxConstraints(maxWidth: maxWidth),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, top: 15, right: 15, bottom: 10),
+                    child: TextField(
+                      onChanged: (value) =>
+                          context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                      cursorColor: Colors.grey,
+                      decoration: InputDecoration(
+                        labelStyle: TextStyle(color: Colors.black87),
+                        focusedBorder: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.grey)),
+                        enabledBorder: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.grey)),
+                        labelText: 'Nome do ou da autor/a do poema',
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 5, right: 15, bottom: 15),
-                  child: TextField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    minLines: 10,
-                    onChanged: (value) =>
-                        context.read<DetailBloc>().add(EditPoemEvent(value)),
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelStyle: TextStyle(color: Colors.black87),
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.grey)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.grey)),
-                      labelText: 'Escribe aquí o teu poema...',
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, top: 5, right: 15, bottom: 15),
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      minLines: 10,
+                      onChanged: (value) =>
+                          context.read<DetailBloc>().add(EditPoemEvent(value)),
+                      cursorColor: Colors.grey,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelStyle: TextStyle(color: Colors.black87),
+                        focusedBorder: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.grey)),
+                        enabledBorder: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.grey)),
+                        labelText: 'Escribe aquí o teu poema...',
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ));

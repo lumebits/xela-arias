@@ -52,33 +52,37 @@ class ImageDetailImpl extends BasePage {
         }
       },
       child: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints(maxWidth: maxWidth),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15, top: 15, right: 15, bottom: 10),
-                child: TextField(
-                  onChanged: (value) =>
-                      context.read<DetailBloc>().add(EditAuthorEvent(value)),
-                  cursorColor: Colors.grey,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black87),
-                    focusedBorder: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey)),
-                    enabledBorder: new OutlineInputBorder(
-                        borderSide: new BorderSide(color: Colors.grey)),
-                    labelText: 'Nome do ou da autor/a da imaxe',
+        child: Center(
+          child: Container(
+            constraints: BoxConstraints(maxWidth: maxWidth),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 15, right: 15, bottom: 10),
+                  child: TextField(
+                    onChanged: (value) =>
+                        context.read<DetailBloc>().add(EditAuthorEvent(value)),
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.black87),
+                      focusedBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey)),
+                      enabledBorder: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey)),
+                      labelText: 'Nome do ou da autor/a da imaxe',
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 15, top: 5, right: 15, bottom: 15),
-                child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15, top: 5, right: 15, bottom: 15),
+                  child: Image.memory(fileAndCard.image, fit: BoxFit.cover),
+                )
+              ],
+            ),
           ),
         ),
       ),

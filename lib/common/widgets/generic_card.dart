@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:xela_arias/common/models/EntityType.dart';
 import 'package:xela_arias/common/models/GenericCard.dart';
@@ -118,7 +119,7 @@ class PoemItem extends StatelessWidget {
     }
     return Container(
       width: width,
-      constraints: BoxConstraints(minHeight: width * (1920 / 1080), maxHeight: width * (1920 / 1080)),
+      constraints: BoxConstraints(maxHeight: width * (1920 / 1080)),
       child:
         InkWell(
           onTap: () {
@@ -129,17 +130,20 @@ class PoemItem extends StatelessWidget {
             }
           },
           child: SingleChildScrollView(
-            child: Container(
-              child:
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    card.text.replaceAll("_b","\n") + credits,
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic
+            child: Center(
+              child: Container(
+                child:
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      card.text.replaceAll("_b","\n") + credits,
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: kIsWeb ? 18.0 : 14.0
+                      ),
                     ),
                   ),
-                ),
+              ),
             ),
           ),
         ),

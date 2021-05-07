@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../routes.dart';
 import '../../theme.dart';
@@ -37,7 +38,7 @@ class ProjectPage extends BasePage {
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                           color: Colors.blueGrey,
-                          fontSize: 14,
+                          fontSize: kIsWeb ? 18.0 : 14.0,
                           fontStyle: FontStyle.italic
                       ),
                     ),
